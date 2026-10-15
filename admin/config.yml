@@ -1,0 +1,40 @@
+
+backend:
+  name: turbo-github
+  turbo_site_id: "36a76f8b-c7bf-43d2-86d7-e1b8ba01fba4"
+  branch: main
+
+locale: "ko"
+
+media_folder: "images/uploads"
+public_folder: "/my-diary/images/uploads"
+
+collections:
+  - name: "diary"
+    label: "일기"
+    folder: "diary"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "제목"
+        name: "title"
+        widget: "string"
+
+      - label: "날짜"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+
+      - label: "대표 사진"
+        name: "cover"
+        widget: "image"
+        required: false
+
+      - label: "본문"
+        name: "body"
+        widget: "markdown"

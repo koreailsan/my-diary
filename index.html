@@ -4,142 +4,446 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Little Diary</title>
+  <title>PIXEL DIARY</title>
+
   <style>
+    :root {
+      --bg: #101522;
+      --panel: #202a40;
+      --panel2: #293650;
+      --line: #526587;
+      --white: #f3f4df;
+      --muted: #aab8cb;
+      --green: #a7f070;
+      --yellow: #ffe28a;
+      --pink: #f59bd8;
+      --blue: #8ed8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      background: #d9d2c3;
-      color: #38352e;
+      padding: 20px 14px;
+      color: var(--white);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(#35415c 1px, transparent 1px);
+      background-size: 16px 16px;
       font-family: "Courier New", monospace;
       font-size: 14px;
+      line-height: 1.8;
     }
 
-    header {
-      background: #35483d;
-      color: #f4e9d2;
-      padding: 28px 20px;
-      text-align: center;
-      border-bottom: 5px solid #a68b61;
-    }
-
-    header h1 {
-      margin: 0 0 10px;
-      font-size: 30px;
-      letter-spacing: 3px;
-    }
-
-    header p {
-      margin: 0;
-    }
-
-    nav {
-      background: #eee5d3;
-      padding: 12px;
-      text-align: center;
-      border-bottom: 1px solid #b6a88f;
-    }
-
-    nav a {
-      color: #35483d;
-      margin: 0 12px;
+    a {
+      color: var(--green);
       text-decoration: none;
-      font-weight: bold;
     }
 
-    main {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 0 16px;
+    a:hover {
+      color: var(--yellow);
+      text-decoration: underline;
     }
 
-    .panel {
-      background: #f7f1e5;
-      border: 2px solid #8d806a;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 4px 4px 0 #b4a68d;
+    button, input, textarea {
+      font: inherit;
+    }
+
+    .site {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .pixel-box {
+      background: var(--panel);
+      border: 3px solid var(--line);
+      box-shadow: 5px 5px 0 #080c14;
+      padding: 20px;
+      margin-bottom: 22px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      color: var(--green);
     }
 
     .hero {
       text-align: center;
-      padding: 36px 22px;
+      padding: 30px 20px;
+      background:
+        linear-gradient(180deg, #293650, #202a40);
     }
 
-    .photo-placeholder {
-      width: 100%;
-      max-width: 420px;
-      height: 210px;
-      margin: 0 auto 22px;
-      background: #c9c0ad;
-      border: 2px dashed #827762;
+    .pixel-art {
+      height: 150px;
+      max-width: 100%;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      border: 3px solid var(--line);
+      background-color: #202e50;
+      background-image:
+        radial-gradient(circle, #fff0a6 2px, transparent 3px),
+        linear-gradient(180deg, transparent 68%, #354e45 68%),
+        linear-gradient(180deg, transparent 79%, #253b35 79%);
+      background-size: 47px 39px, 100% 100%, 100% 100%;
+      position: relative;
       display: flex;
-      align-items: center;
+      align-items: end;
       justify-content: center;
-      color: #5c5548;
     }
 
-    h2 {
+    .pixel-art span {
+      color: var(--white);
+      background: #101522;
+      padding: 5px 12px;
+      margin-bottom: 12px;
+      border: 2px solid var(--line);
+    }
+
+    .hero h1 {
+      color: var(--green);
+      font-size: clamp(27px, 6vw, 43px);
+      line-height: 1.3;
+      margin: 10px 0;
+      text-shadow: 3px 3px 0 #334b41;
+    }
+
+    .subtitle {
+      color: var(--yellow);
+      margin: 8px 0 18px;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    nav a {
+      display: inline-block;
+      background: #101522;
+      border: 2px solid var(--line);
+      padding: 8px 12px;
+    }
+
+    nav a:hover {
+      background: #35415c;
+      text-decoration: none;
+    }
+
+    .section-title {
+      color: var(--yellow);
       font-size: 19px;
-      border-bottom: 1px dashed #9e9078;
+      margin: 0 0 18px;
       padding-bottom: 10px;
+      border-bottom: 2px dashed var(--line);
+    }
+
+    .section-title::before {
+      content: "> ";
+      color: var(--green);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .avatar {
+      height: 120px;
+      display: grid;
+      place-items: center;
+      background: #35415c;
+      border: 3px solid var(--line);
+      color: var(--pink);
+      font-size: 35px;
+    }
+
+    .label {
+      color: var(--blue);
+    }
+
+    .diary-entry {
+      border-left: 3px solid var(--green);
+      padding: 2px 0 14px 16px;
+      margin: 16px 0;
     }
 
     .date {
-      color: #79705f;
+      color: var(--pink);
       font-size: 12px;
+    }
+
+    .diary-entry h3 {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .diary-entry p {
+      color: var(--muted);
+      margin: 5px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      color: var(--blue);
+      border: 1px solid var(--line);
+      padding: 1px 7px;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .gallery-art {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      background: #35415c;
+      border: 3px solid var(--line);
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .gallery-item:nth-child(2) .gallery-art {
+      background: #453958;
+    }
+
+    .gallery-item:nth-child(3) .gallery-art {
+      background: #354c47;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      background: #101522;
+      border: 2px solid var(--line);
+      padding: 12px;
+    }
+
+    .counter-number {
+      color: var(--green);
+      letter-spacing: 3px;
+      font-size: 19px;
+    }
+
+    .notice {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .guest {
+      background: #101522;
+      border: 2px solid var(--line);
+      padding: 14px;
+      margin: 12px 0;
+    }
+
+    .guest strong {
+      color: var(--pink);
     }
 
     footer {
       text-align: center;
-      padding: 25px;
-      color: #6e6658;
+      color: var(--muted);
       font-size: 12px;
+      padding: 12px 0 28px;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 12px 10px;
+      }
+
+      .pixel-box {
+        padding: 15px;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>MY LITTLE DIARY</h1>
-    <p>Small moments, kept forever.</p>
-  </header>
+  <div class="site">
 
-  <nav>
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#diary">DIARY</a>
-  </nav>
+    <div class="topbar">
+      <span>PIXEL WORLD v1.0</span>
+      <span class="status">● SYSTEM ONLINE</span>
+    </div>
 
-  <main>
-    <section class="panel hero" id="home">
-      <div class="photo-placeholder">
-        [ YOUR PHOTO GOES HERE ]
+    <header class="pixel-box hero" id="home">
+      <div class="pixel-art">
+        <span>WELCOME TO MY WORLD</span>
       </div>
-      <h2>안녕하세요, 나의 작은 기록실입니다.</h2>
-      <p>
-        평범한 하루와 좋아하는 것들,<br>
-        오래 기억하고 싶은 순간을 기록합니다.
+
+      <h1>PIXEL DIARY</h1>
+      <p class="subtitle">A little world of my own.</p>
+
+      <p class="intro">
+        안녕하세요!<br>
+        일상과 사진, 좋아하는 것들을 모으는<br>
+        나만의 작은 인터넷 공간입니다.
       </p>
-    </section>
 
-    <section class="panel" id="about">
-      <h2>ABOUT THIS SPACE</h2>
-      <p>
-        이곳은 나만의 작은 인터넷 공간입니다.<br>
-        사진과 글을 천천히 쌓아가려고 합니다.
-      </p>
-    </section>
+      <nav>
+        <a href="#about">[ PROFILE ]</a>
+        <a href="#diary">[ DIARY ]</a>
+        <a href="#gallery">[ GALLERY ]</a>
+        <a href="#guestbook">[ GUESTBOOK ]</a>
+      </nav>
+    </header>
 
-    <section class="panel" id="diary">
-      <h2>RECENT DIARY</h2>
-      <p class="date">2026.10.15</p>
-      <p>첫 번째 페이지를 만들었다. 앞으로 이곳에 나의 일상을 기록할 예정이다.</p>
-      <p class="date">COMING SOON...</p>
-      <p>새로운 기록이 이곳에 쌓일 예정입니다.</p>
-    </section>
-  </main>
+    <main>
+      <section class="pixel-box" id="about">
+        <h2 class="section-title">PLAYER PROFILE</h2>
 
-  <footer>
-    Made slowly, with care. © My Little Diary
-  </footer>
+        <div class="profile-grid">
+          <div class="avatar">★</div>
+
+          <div>
+            <div><span class="label">NAME:</span> 나의 닉네임</div>
+            <div><span class="label">CLASS:</span> 기록하는 사람</div>
+            <div><span class="label">HOBBY:</span> 사진, 일기, 산책</div>
+            <p>
+              평범한 날도 나중에는 특별한 기억이 될 수 있으니까.
+              이곳에 하나씩 기록합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="pixel-box" id="diary">
+        <h2 class="section-title">SAVE POINT / DIARY</h2>
+
+        <article class="diary-entry">
+          <span class="date">2026.10.15</span>
+          <h3>첫 번째 홈페이지를 만들다</h3>
+          <p>
+            나만의 인터넷 공간을 만들기 시작했다.
+            앞으로 이곳에 다양한 기록을 쌓아갈 예정이다.
+          </p>
+          <span class="tag"># FIRST LOG</span>
+        </article>
+
+        <article class="diary-entry">
+          <span class="date">NEW RECORD</span>
+          <h3>다음 일기를 기다리는 중...</h3>
+          <p>새로운 기록이 이곳에 추가될 예정입니다.</p>
+          <span class="tag"># COMING SOON</span>
+        </article>
+
+        <p class="notice">
+          ※ 현재는 디자인 예시입니다. 글쓰기 관리 기능은 추후 연결합니다.
+        </p>
+      </section>
+
+      <section class="pixel-box" id="gallery">
+        <h2 class="section-title">ITEM COLLECTION / GALLERY</h2>
+
+        <div class="gallery">
+          <div class="gallery-item">
+            <div class="gallery-art">🌄</div>
+            <div>MEMORY 001</div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-art">🌙</div>
+            <div>MEMORY 002</div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-art">🌱</div>
+            <div>MEMORY 003</div>
+          </div>
+        </div>
+
+        <p class="notice">
+          실제 사진을 추가하면 이 영역을 사진 갤러리로 사용할 수 있습니다.
+        </p>
+      </section>
+
+      <section class="pixel-box" id="guestbook">
+        <h2 class="section-title">TOWN BOARD / GUESTBOOK</h2>
+
+        <div class="guest">
+          <strong>SYSOP</strong>
+          <p>방문해 주셔서 감사합니다!</p>
+          <span class="date">SYSTEM MESSAGE</span>
+        </div>
+
+        <p class="notice">
+          방명록 저장 기능은 아직 연결되지 않았습니다.
+          추후 방문자가 메시지를 남기고 저장할 수 있도록 구현할 예정입니다.
+        </p>
+      </section>
+
+      <section class="pixel-box">
+        <h2 class="section-title">VISITOR DATA</h2>
+
+        <div class="counter">
+          <span>VISITORS</span>
+          <span class="counter-number">----</span>
+        </div>
+
+        <p class="notice">
+          방문자 수 집계 기능을 연결하면 실제 숫자가 표시됩니다.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>★ THANK YOU FOR VISITING MY WORLD ★</p>
+      <p>PIXEL DIARY · EST. 2026</p>
+    </footer>
+
+  </div>
 </body>
 </html>
